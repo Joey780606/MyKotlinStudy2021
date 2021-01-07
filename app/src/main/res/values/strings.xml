@@ -2,4 +2,6 @@
     <string name="app_name">MyKotlin2021</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="codelab_implicit_intent_text">Implicit intent test</string>
 </resources>

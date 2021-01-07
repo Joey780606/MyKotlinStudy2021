@@ -57,6 +57,7 @@ class InitialFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        var mSendInfo: Int = 0
 
         binding.btnDatabinding.setOnClickListener {
             binding.tvMyTestText.text = "Navigation click"
@@ -67,7 +68,7 @@ class InitialFragment : Fragment() {
         }
 
         binding.btnCodelab.setOnClickListener { view : View ->
-            view.findNavController().navigate(R.id.action_initialFragment_to_codeLabFragment)
+            view.findNavController().navigate(InitialFragmentDirections.actionInitialFragmentToCodeLabFragment(mSendInfo))
         }
     }
 

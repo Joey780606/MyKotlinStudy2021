@@ -1,11 +1,15 @@
 package pcp.com.mykotlin2021.codelabtest
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import pcp.com.mykotlin2021.InitialFragmentDirections
 import pcp.com.mykotlin2021.R
 import pcp.com.mykotlin2021.databinding.FragmentCodeLabBinding
 import pcp.com.mykotlin2021.databinding.FragmentInitialBinding
@@ -43,6 +47,21 @@ class CodeLabFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_code_lab, container, false)
 
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val args = CodeLabFragmentArgs.fromBundle(requireArguments())
+        binding.tvMyTestText.text = args.showInfo.toString()
+
+        binding.btnIntent.setOnClickListener { view : View ->
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.setType("text/plain")
+                .putExtra(Intent.EXTRA_TEXT, getString(R.string.codelab_implicit_intent_text) + args.showInfo.toString())
+            startActivity(shareIntent)
+        }
+        Toast.makeText(context, "ShowInfo: ${args.showInfo}", Toast.LENGTH_LONG).show()
     }
 
     companion object {

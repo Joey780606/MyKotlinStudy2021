@@ -18,5 +18,9 @@
         android:id="@+id/codeLabFragment"
         android:name="pcp.com.mykotlin2021.codelabtest.CodeLabFragment"
         android:label="fragment_code_lab"
-        tools:layout="@layout/fragment_code_lab" />
+        tools:layout="@layout/fragment_code_lab" >
+        <argument
+            android:name="showInfo"
+            app:argType="integer" />
+    </fragment>
 </navigation>
