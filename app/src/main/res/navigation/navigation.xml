@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/initialFragment">
+
+    <fragment
+        android:id="@+id/initialFragment"
+        android:name="pcp.com.mykotlin2021.InitialFragment"
+        android:label="fragment_initial"
+        tools:layout="@layout/fragment_initial" >
+        <action
+            android:id="@+id/action_initialFragment_to_codeLabFragment"
+            app:destination="@id/codeLabFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/codeLabFragment"
+        android:name="pcp.com.mykotlin2021.codelabtest.CodeLabFragment"
+        android:label="fragment_code_lab"
+        tools:layout="@layout/fragment_code_lab" />
+</navigation>

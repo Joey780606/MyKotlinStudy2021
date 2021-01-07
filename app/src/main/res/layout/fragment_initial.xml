@@ -48,11 +48,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnCodelab"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
-            android:text="Button"
+            android:text="Codelab test"
+            android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline_50Vper"
             app:layout_constraintTop_toTopOf="parent" />

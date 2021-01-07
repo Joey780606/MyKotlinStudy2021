@@ -9,10 +9,12 @@
         android:layout_height="match_parent">
 
         <fragment
-            android:id="@+id/titleFragment"
-            android:name="pcp.com.mykotlin2021.InitialFragment"
+            android:id="@+id/myNavHostFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:navGraph="@navigation/navigation"
+            app:defaultNavHost="true"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
