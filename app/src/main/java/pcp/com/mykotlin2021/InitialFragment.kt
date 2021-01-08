@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import pcp.com.mykotlin2021.databinding.ActivityMainBinding
 import pcp.com.mykotlin2021.databinding.FragmentInitialBinding
+import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,6 +42,7 @@ class InitialFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        Timber.i("Lifecycle check: onCreate")
     }
 
     override fun onCreateView(
@@ -51,7 +53,7 @@ class InitialFragment : Fragment() {
         //return inflater.inflate(R.layout.fragment_initial, container, false)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_initial, container, false)
 
-
+        Timber.i("Lifecycle check: onCreateView")
         return binding.root
     }
 
@@ -70,6 +72,7 @@ class InitialFragment : Fragment() {
         binding.btnCodelab.setOnClickListener { view : View ->
             view.findNavController().navigate(InitialFragmentDirections.actionInitialFragmentToCodeLabFragment(mSendInfo))
         }
+        Timber.i("Lifecycle check: onActivityCreated")
     }
 
     companion object {
