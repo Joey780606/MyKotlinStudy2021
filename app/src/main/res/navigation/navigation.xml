@@ -22,5 +22,13 @@
         <argument
             android:name="showInfo"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_codeLabFragment_to_onSaveInstancesStateFragment"
+            app:destination="@id/onSaveInstancesStateFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/onSaveInstancesStateFragment"
+        android:name="pcp.com.mykotlin2021.codelabtest.OnSaveInstancesStateFragment"
+        android:label="fragment_on_save_instances_state"
+        tools:layout="@layout/fragment_on_save_instances_state" />
 </navigation>

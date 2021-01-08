@@ -61,6 +61,10 @@ class CodeLabFragment : Fragment() {
                 .putExtra(Intent.EXTRA_TEXT, getString(R.string.codelab_implicit_intent_text) + args.showInfo.toString())
             startActivity(shareIntent)
         }
+
+        binding.btnOnSaveInstanceState.setOnClickListener { view : View ->
+            view.findNavController().navigate(R.id.action_codeLabFragment_to_onSaveInstancesStateFragment)
+        }
         Toast.makeText(context, "ShowInfo: ${args.showInfo}", Toast.LENGTH_LONG).show()
     }
 
