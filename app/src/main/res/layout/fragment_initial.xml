@@ -76,5 +76,15 @@
             app:layout_constraintStart_toStartOf="@+id/guideline_50Vper"
             app:layout_constraintTop_toTopOf="@+id/guideline_90Hper" />
 
+        <Button
+            android:id="@+id/btnBluetooth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Bluetooth test"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_50Vper"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnDatabinding" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

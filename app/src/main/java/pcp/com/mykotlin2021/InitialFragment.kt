@@ -64,13 +64,17 @@ class InitialFragment : Fragment() {
         binding.btnDatabinding.setOnClickListener {
             binding.tvMyTestText.text = "Navigation click"
             binding.myHorseClass =
-                myName   //Data class處理3: 把 activity_main.xml 內的 myHorseClass 設為 myName, 這樣 xml 的 tvMyTestText2 值就會變
+                    myName   //Data class處理3: 把 activity_main.xml 內的 myHorseClass 設為 myName, 這樣 xml 的 tvMyTestText2 值就會變
             Log.v(TAG, "Horse test 001")
             binding.invalidateAll()
         }
 
         binding.btnCodelab.setOnClickListener { view : View ->
             view.findNavController().navigate(InitialFragmentDirections.actionInitialFragmentToCodeLabFragment(mSendInfo))
+        }
+
+        binding.btnBluetooth.setOnClickListener{view : View ->
+            view.findNavController().navigate(R.id.action_initialFragment_to_bluetoothFragment)
         }
         Timber.i("Lifecycle check: onActivityCreated")
     }

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_initialFragment_to_codeLabFragment"
             app:destination="@id/codeLabFragment" />
+        <action
+            android:id="@+id/action_initialFragment_to_bluetoothFragment"
+            app:destination="@id/bluetoothFragment" />
     </fragment>
     <fragment
         android:id="@+id/codeLabFragment"
@@ -31,4 +34,9 @@
         android:name="pcp.com.mykotlin2021.codelabtest.OnSaveInstancesStateFragment"
         android:label="fragment_on_save_instances_state"
         tools:layout="@layout/fragment_on_save_instances_state" />
+    <fragment
+        android:id="@+id/bluetoothFragment"
+        android:name="pcp.com.mykotlin2021.bluetooth.BluetoothFragment"
+        android:label="fragment_bluetooth"
+        tools:layout="@layout/fragment_bluetooth" />
 </navigation>
