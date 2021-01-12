@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import pcp.com.mykotlin2021.R
+import pcp.com.mykotlin2021.databinding.FragmentBluetoothBinding
+import pcp.com.mykotlin2021.databinding.FragmentInitialBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +27,9 @@ class BluetoothFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var binding: FragmentBluetoothBinding
+    private lateinit var viewModel: BluetoothViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -32,8 +40,12 @@ class BluetoothFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bluetooth, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bluetooth, container, false)
+        viewModel = ViewModelProvider(this).get(BluetoothViewModel::class.java)
+
+        binding.btnScan.setOnClickListener { onScan() }
+
+        return binding.root
     }
 
     companion object {
@@ -54,5 +66,9 @@ class BluetoothFragment : Fragment() {
                         putString(ARG_PARAM2, param2)
                     }
                 }
+    }
+
+    private fun onScan() {
+        viewModel.scanLeDevice()
     }
 }
