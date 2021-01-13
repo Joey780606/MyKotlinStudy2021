@@ -11,13 +11,11 @@ import androidx.lifecycle.ViewModel
 import timber.log.Timber
 
 class BluetoothViewModel : ViewModel() {
-
     // Scan will use
     private val bluetoothLeScanner = BluetoothAdapter.getDefaultAdapter().bluetoothLeScanner
     private var mScanning = false
 
     private val SCAN_PERIOD: Long = 10000
-
 
     init {
         Timber.i("BluetoothViewModel created")
