@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import pcp.com.mykotlin2021.R
 import pcp.com.mykotlin2021.databinding.FragmentBluetoothBinding
+import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,6 +49,8 @@ class BluetoothFragment : Fragment() {
     private lateinit var binding: FragmentBluetoothBinding
     private lateinit var viewModel: BluetoothViewModel
 
+    var ScanDeviceInfo: ArrayList<BleScanDevice>? = arrayListOf<BleScanDevice>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -62,6 +66,15 @@ class BluetoothFragment : Fragment() {
 
         binding.btnScan.setOnClickListener { onScan() }
         binding.btnPermission.setOnClickListener { checkPermission() }
+
+        viewModel.scanFinish.observe(viewLifecycleOwner, Observer<Boolean> { scanFinish ->  //Horse important:  對 viewModel.scanFinish進行 Observe,若該值發生變化,就執行下面的工作
+            if(scanFinish) {
+                ScanDeviceInfo = viewModel.ScanDevice
+                Timber.i("Fragment Total scan count:" + ScanDeviceInfo?.size)
+                showScanInfo();
+                viewModel.FromUI_ScanFinish()
+            }
+        })
         return binding.root
     }
 
@@ -117,6 +130,12 @@ class BluetoothFragment : Fragment() {
                     requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), myPermissionsRequestAccessFineLocation)
                 }
             }
+        }
+    }
+
+    private fun showScanInfo() {
+        for (dev in ScanDeviceInfo.orEmpty()) {  //Horse important: orEmpty() 表示 如果它不是null，則返回此列表，否則返回空列表。
+            Timber.i("Fragment Total scan name:" + dev.device?.name + " , " + dev.address)
         }
     }
 }

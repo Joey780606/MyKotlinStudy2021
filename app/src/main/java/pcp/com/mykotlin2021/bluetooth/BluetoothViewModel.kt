@@ -7,6 +7,8 @@ import android.bluetooth.le.ScanResult
 import android.os.Handler
 import android.os.Looper
 import androidx.core.os.postDelayed
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 import androidx.lifecycle.ViewModel
 import timber.log.Timber
@@ -18,7 +20,11 @@ class BluetoothViewModel : ViewModel() {
 
     private val SCAN_PERIOD: Long = 10000
     
-    private var ScanDevice: ArrayList<BleScanDevice>? = arrayListOf<BleScanDevice>()
+    var ScanDevice: ArrayList<BleScanDevice>? = arrayListOf<BleScanDevice>()
+
+    private val _scanFinish = MutableLiveData<Boolean>()    //Horse important: 在 ViewModel 內部要用MutableLiveData
+    val scanFinish: LiveData<Boolean>   ///Horse important: 給外部使用的,就要用LiveData
+        get() = _scanFinish
 
     enum class ScanDevOperator{
         ADD, MODIFY, DELETE, CLEAR
@@ -38,15 +44,21 @@ class BluetoothViewModel : ViewModel() {
             Handler(Looper.getMainLooper()).postDelayed({
                 mScanning = false
                 bluetoothLeScanner.stopScan(leScanCallback)
+                _scanFinish.value = true
                 Timber.i("Total scan count:" + ScanDevice?.size)
             }, SCAN_PERIOD)
             mScanning = true
             SetScanDevice(ScanDevOperator.CLEAR, null)
+            _scanFinish.value = false
             bluetoothLeScanner.startScan(leScanCallback)
         } else {
             mScanning = false
             bluetoothLeScanner.startScan(leScanCallback)
         }
+    }
+
+    public fun FromUI_ScanFinish() {
+        _scanFinish.value = false
     }
 
     private val leScanCallback: ScanCallback = object : ScanCallback() {
@@ -66,9 +78,11 @@ class BluetoothViewModel : ViewModel() {
             ScanDevOperator.ADD ->  {
                 returnValue = false;
                 bleDevice?.let {    //Horse important: 表示 bleDevice若不為null才做以下事情
-                    var newdev = BleScanDevice(bleDevice.address, bleDevice, 0, System.currentTimeMillis())
-                    ScanDevice?.add(newdev)
-                    returnValue = true
+                    bleDevice.name?.let {   //Horse important: 表示 bleDevice.name 若不為null才做以下事情
+                        var newdev = BleScanDevice(bleDevice.address, bleDevice, 0, System.currentTimeMillis())
+                        ScanDevice?.add(newdev)
+                        returnValue = true
+                    }
                 }
             }
             ScanDevOperator.MODIFY -> {
